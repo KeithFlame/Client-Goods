@@ -1,2 +1,5 @@
-#include"member_shoopping.h"
+#include"member_shopping.h"
 
+int main(){
+    return 0;
+}
