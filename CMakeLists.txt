@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.0)
-project(Exercise)
+project(Exercise_shop)
 
 set(CMAKE_CXX_STANDARD 14)
 
