@@ -7,30 +7,36 @@
 //考虑到实际的收银过程，同一种类的商品有可能会分几次扫描、计价，目前的实现能否满足需求？
 //例如：oneshopping.countNestCoffee(1); oneshopping.countNestCoffee(3); 最终结果应该给是48*3
 
-void firstShop(std::map<std::string, int> &m_countcost) {
-	//std::map<std::string, int> m_countcost;
-	m_countcost["NestCoffee"] = 0;
-	m_countcost["CoffeeCups"] = 1;
-	m_countcost["Chocolates"] = 3;
-	m_countcost["FruitTea"] = 5;
+
+
+
+//add or remove some goods
+void firstShop(std::map<std::string, int> &shopList) {
+	//std::map<std::string, int> shopList;
+	shopList["NestCoffee"] = 0;
+	shopList["CoffeeCups"] = 1;
+	shopList["Chocolates"] = 3;
+	shopList["FruitTea"] = 5;
 	
 }
 
-void secondShop(std::map<std::string, int>& m_countcost) {
-	//std::map<std::string, int> m_countcost;
-	m_countcost["NestCoffee"] = 4;
-	m_countcost["CoffeeCups"] = 1;
-	m_countcost["Chocolates"] = 0;
-	m_countcost["FruitTea"] = 2;
+//add or remove some goods
+void secondShop(std::map<std::string, int>& shopList) {
+	//std::map<std::string, int> shopList;
+	shopList["NestCoffee"] = 4;
+	shopList["CoffeeCups"] = 1;
+	shopList["Chocolates"] = 0;
+	shopList["FruitTea"] = 2;
 
 }
 
-void thirdShop(std::map<std::string, int>& m_countcost) {
-	//std::map<std::string, int> m_countcost;
-	m_countcost["NestCoffee"] = -8;
-	m_countcost["CoffeeCups"] = -1;
-	m_countcost["Chocolates"] = -4;
-	m_countcost["FruitTea"] = -5;
+//add or remove some goods
+void thirdShop(std::map<std::string, int>& shopList) {
+	//std::map<std::string, int> shopList;
+	shopList["NestCoffee"] = -8;
+	shopList["CoffeeCups"] = -1;
+	shopList["Chocolates"] = -4;
+	shopList["FruitTea"] = -5;
 
 }
 //once 
@@ -38,40 +44,41 @@ TEST(CMailTest, test_when_member_GOLD_buy_a_coffee) {
 	Shop oneshopping;
 
 	oneshopping.checkMemberRank('A');
-	firstShop(oneshopping.m_countcost);
-	EXPECT_FLOAT_EQ(716.76, oneshopping.selectGoods(oneshopping.m_countcost));
+	firstShop(oneshopping.shopList);
+	EXPECT_FLOAT_EQ(716.76, oneshopping.selectGoods(oneshopping.shopList));
 }
 
 // add some goods
 TEST(CMailTest, test_when_member_NON_buy_a_coffee) {
 	Shop oneshopping;
 	oneshopping.checkMemberRank('A');
-	firstShop(oneshopping.m_countcost);
-	oneshopping.selectGoods(oneshopping.m_countcost);
-	secondShop(oneshopping.m_countcost);
-	EXPECT_FLOAT_EQ(1175.16, oneshopping.selectGoods(oneshopping.m_countcost));
+	firstShop(oneshopping.shopList);
+	oneshopping.selectGoods(oneshopping.shopList);
+	secondShop(oneshopping.shopList);
+	EXPECT_FLOAT_EQ(1175.16, oneshopping.selectGoods(oneshopping.shopList));
 }
 
 //remove some goods
 TEST(CMailTest, test_when_member_NON_buy_a_coffee_and_5_chocolates) {
 	Shop oneshopping;
+	firstShop(oneshopping.shopList);
+	oneshopping.selectGoods(oneshopping.shopList);
+	secondShop(oneshopping.shopList);
+	oneshopping.selectGoods(oneshopping.shopList);
+	thirdShop(oneshopping.shopList);
 	oneshopping.checkMemberRank('A');
-	firstShop(oneshopping.m_countcost);
-	oneshopping.selectGoods(oneshopping.m_countcost);
-	secondShop(oneshopping.m_countcost);
-	oneshopping.selectGoods(oneshopping.m_countcost);
-	thirdShop(oneshopping.m_countcost);
-	EXPECT_FLOAT_EQ(266.40, oneshopping.selectGoods(oneshopping.m_countcost));
+
+	EXPECT_FLOAT_EQ(266.40, oneshopping.selectGoods(oneshopping.shopList));
 }
 
 //NO VIP
 TEST(CMailTest, test_when_member_NON_buy_a_coffee_and_1_chocolate_and_1_tea_and_3_cups) {
 	Shop oneshopping;
-	firstShop(oneshopping.m_countcost);
-	oneshopping.selectGoods(oneshopping.m_countcost);
-	secondShop(oneshopping.m_countcost);
-	oneshopping.selectGoods(oneshopping.m_countcost);
-	thirdShop(oneshopping.m_countcost);
-	EXPECT_FLOAT_EQ(296, oneshopping.selectGoods(oneshopping.m_countcost));
+	firstShop(oneshopping.shopList);
+	oneshopping.selectGoods(oneshopping.shopList);
+	secondShop(oneshopping.shopList);
+	oneshopping.selectGoods(oneshopping.shopList);
+	thirdShop(oneshopping.shopList);
+	EXPECT_FLOAT_EQ(296, oneshopping.selectGoods(oneshopping.shopList));
 }
 
