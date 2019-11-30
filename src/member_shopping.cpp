@@ -13,10 +13,10 @@ void Shop::calcArrange() {
 
 void Shop::initCart() {
 	//m_price命名成m_price，会不会更可读？
-	m_countcost["NestCoffee"] = 0;
-	m_countcost["CoffeeCups"] = 0;
-	m_countcost["Chocolates"] = 0;
-	m_countcost["FruitTea"] = 0;
+	shopList["NestCoffee"] = 0;
+	shopList["CoffeeCups"] = 0;
+	shopList["Chocolates"] = 0;
+	shopList["FruitTea"] = 0;
 
 	countAllCost["NestCoffee"] = 0;
 	countAllCost["CoffeeCups"] = 0;
@@ -25,11 +25,11 @@ void Shop::initCart() {
 
 }
 
-double Shop::selectGoods(std::map<std::string, int> &m_countcost) {
-	countAllCost["NestCoffee"] = countAllCost["NestCoffee"] + m_countcost["NestCoffee"];
-	countAllCost["CoffeeCups"] = countAllCost["CoffeeCups"] + m_countcost["CoffeeCups"];
-	countAllCost["Chocolates"] = countAllCost["Chocolates"] + m_countcost["Chocolates"];
-	countAllCost["FruitTea"] = countAllCost["FruitTea"] + m_countcost["FruitTea"];
+double Shop::selectGoods(std::map<std::string, int> &shopList) {
+	countAllCost["NestCoffee"] = countAllCost["NestCoffee"] + shopList["NestCoffee"];
+	countAllCost["CoffeeCups"] = countAllCost["CoffeeCups"] + shopList["CoffeeCups"];
+	countAllCost["Chocolates"] = countAllCost["Chocolates"] + shopList["Chocolates"];
+	countAllCost["FruitTea"] = countAllCost["FruitTea"] + shopList["FruitTea"];
 	return calcCost();
 }
 
@@ -42,6 +42,7 @@ void Shop::checkMemberRank(char memberrank) {
 		m_memberDiscount = 1.f;
 
 }
+
 double Shop::calcCost() {
 	double m(0);
 	std::map<std::string, int>::iterator

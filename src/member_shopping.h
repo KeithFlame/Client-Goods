@@ -21,9 +21,9 @@ public:
 	//void countChocolates(double chocolates = 0);
 	//void countFruitTea(double tea = 0);
 
-	double selectGoods(std::map<std::string, int> &m_countcost);
+	double selectGoods(std::map<std::string, int> &shopList);
 
-	std::map<std::string, int> m_countcost;
+	std::map<std::string, int> shopList;
 private:
 
 	double calcCost();
@@ -33,6 +33,5 @@ private:
 	//typedef std::map<double, int> m_goods;
 	std::map<std::string, double> m_price;
 	std::map<std::string, int> countAllCost;
-
 
 };
